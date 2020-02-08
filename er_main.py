@@ -147,6 +147,9 @@ for run in range(args.n_runs):
     #----------
     # Task Loop
     for task, tr_loader in enumerate(train_loader):
+        print("task %d %s" % (task, datetime.now()))
+        sys.stdout.flush()
+
         sample_amt = 0
 
         model = model.train()

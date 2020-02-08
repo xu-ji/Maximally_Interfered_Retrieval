@@ -75,8 +75,8 @@ def get_permuted_mnist(args):
         args.output_loss = 'bernouilli'
 
     # fetch MNIST
-    train = datasets.MNIST('Data/', train=True,  download=True)
-    test  = datasets.MNIST('Data/', train=False, download=True)
+    train = datasets.MNIST('Data/', train=True,  download=False)
+    test  = datasets.MNIST('Data/', train=False, download=False)
 
     try:
         train_x, train_y = train.data, train.targets
@@ -126,8 +126,8 @@ def get_split_mnist(args):
     assert '1.' in str(torch.__version__)[:2], 'Use Pytorch 1.x!'
 
     # fetch MNIST
-    train = datasets.MNIST('Data/', train=True,  download=True)
-    test  = datasets.MNIST('Data/', train=False, download=True)
+    train = datasets.MNIST('Data/', train=True,  download=False)
+    test  = datasets.MNIST('Data/', train=False, download=False)
 
     try:
         train_x, train_y = train.data, train.targets
@@ -207,8 +207,8 @@ def get_split_cifar10(args):
 
 
     # fetch MNIST
-    train = datasets.CIFAR10('Data/', train=True,  download=True)
-    test  = datasets.CIFAR10('Data/', train=False, download=True)
+    train = datasets.CIFAR10('/scratch/shared/nfs1/xuji/datasets/CIFAR/', train=True,  download=False)
+    test  = datasets.CIFAR10('/scratch/shared/nfs1/xuji/datasets/CIFAR/', train=False, download=False)
 
     try:
         train_x, train_y = train.data, train.targets
