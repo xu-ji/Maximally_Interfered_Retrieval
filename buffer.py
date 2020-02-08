@@ -30,6 +30,8 @@ class Buffer(nn.Module):
         else:
             economy = 1
 
+        print((args.gen, economy, args.mem_size))
+
         buffer_size = economy  * args.mem_size
         print('buffer has %d slots' % buffer_size)
 
