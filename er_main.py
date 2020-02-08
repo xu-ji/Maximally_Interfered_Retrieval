@@ -10,7 +10,6 @@ from buffer import Buffer
 from copy   import deepcopy
 from pydoc  import locate
 from model  import ResNet18, MLP
-from datetime import datetime
 
 # Arguments
 # -----------------------------------------------------------------------------------------
@@ -148,7 +147,7 @@ for run in range(args.n_runs):
     #----------
     # Task Loop
     for task, tr_loader in enumerate(train_loader):
-        print("task %d %s" % (task, datetime.now()))
+        print("task %d %s" % (task, datetime.datetime.now()))
         sys.stdout.flush()
 
         sample_amt = 0
