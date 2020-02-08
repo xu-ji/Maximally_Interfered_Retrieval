@@ -10,6 +10,7 @@ from buffer import Buffer
 from copy   import deepcopy
 from pydoc  import locate
 from model  import ResNet18, MLP
+from datetime import datetime
 
 # Arguments
 # -----------------------------------------------------------------------------------------
