@@ -10,6 +10,7 @@ from buffer import Buffer
 from copy   import deepcopy
 from pydoc  import locate
 from model  import ResNet18, MLP
+import datetime
 
 # Arguments
 # -----------------------------------------------------------------------------------------
@@ -68,7 +69,6 @@ if not os.path.exists(sample_path): os.mkdir(sample_path)
 recon_path = os.path.join(args.result_dir,'reconstructions/')
 if not os.path.exists(recon_path): os.mkdir(recon_path)
 if args.suffix is not '':
-    import datetime
     time_stamp = str(datetime.datetime.now().isoformat())
     name_log_txt = args.dataset+'_'+time_stamp + str(np.random.randint(0, 1000)) + args.suffix
     name_log_txt=name_log_txt +'.log'
