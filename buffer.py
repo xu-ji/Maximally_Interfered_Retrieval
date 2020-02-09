@@ -196,6 +196,10 @@ class Buffer(nn.Module):
         else:
             indices = torch.from_numpy(np.random.choice(bx.size(0), amt, replace=False))
 
+            print("in buffer.sample()")
+            print((bx.size, amt))
+            print(indices)
+
             if self.args.cuda:
                 indices = indices.to(self.args.device)
 
