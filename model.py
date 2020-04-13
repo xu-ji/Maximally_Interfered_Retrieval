@@ -261,7 +261,6 @@ class ResNet(nn.Module):
         return out
 
     def forward(self, x):
-        print("model forward, shape %s" % str(x.shape))
         out = self.return_hidden(x)
         out = self.linear(out)
         return out
