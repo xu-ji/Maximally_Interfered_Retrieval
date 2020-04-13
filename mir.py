@@ -356,6 +356,11 @@ def retrieve_replay_update(args, model, opt, input_x, input_y, buffer, task, loa
     else:
         mem_x, mem_y, bt = buffer.sample(args.buffer_batch_size, exclude_task=task)
 
+    if len(mem_x.shape) == 3:
+      mem_x = mem_x.unsqueeze(dim=0)
+      assert(len(mem_y.shape) == 0)
+      mem_y = mem_y.unsqueeze(dim=0)
+
     logits_buffer = model(mem_x)
     if args.multiple_heads:
         mask = torch.zeros_like(logits_buffer)
