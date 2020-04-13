@@ -254,6 +254,7 @@ print('--------------------------------------')
 for mode in ['valid','test']:
 
     final_accs = [LOG[x][mode]['final_acc'] for x in range(args.n_runs)]
+    print(final_accs)
     final_acc_avg = np.mean(final_accs)
     final_acc_se = 2*np.std(final_accs) / np.sqrt(args.n_runs)
     final_forgets = [LOG[x][mode]['final_forget'] for x in range(args.n_runs)]
