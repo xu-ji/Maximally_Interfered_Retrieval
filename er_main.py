@@ -260,13 +260,13 @@ for mode in ['valid','test']:
     final_forget_avg = np.mean(final_forgets)
     final_forget_se = 2*np.std(final_forgets) / np.sqrt(args.n_runs)
 
-    print('\nFinal {} Accuracy: {:.3f} +/- {:.3f}'.format(mode, final_acc_avg, final_acc_se))
-    print('\nFinal {} Forget: {:.3f} +/- {:.3f}'.format(mode, final_forget_avg, final_forget_se))
+    print('\nFinal {} Accuracy: {:.5f} +/- {:.5f}'.format(mode, final_acc_avg, final_acc_se))
+    print('\nFinal {} Forget: {:.5f} +/- {:.5f}'.format(mode, final_forget_avg, final_forget_se))
 
     if name_log_txt is not None:
         with open(name_log_txt, "a") as text_file:
-            print('\nFinal {} Accuracy: {:.3f} +/- {:.3f}'.format(mode, final_acc_avg, final_acc_se), file=text_file)
-            print('\nFinal {} Forget: {:.3f} +/- {:.3f}'.format(mode, final_forget_avg, final_forget_se), file=text_file)
+            print('\nFinal {} Accuracy: {:.5f} +/- {:.5f}'.format(mode, final_acc_avg, final_acc_se), file=text_file)
+            print('\nFinal {} Forget: {:.5f} +/- {:.5f}'.format(mode, final_forget_avg, final_forget_se), file=text_file)
 
     if wandb is not None:
         wandb.log({mode+'final_acc_avg':final_acc_avg})
