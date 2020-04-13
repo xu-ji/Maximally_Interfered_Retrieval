@@ -35,6 +35,10 @@ parser.add_argument('--use_conv', action='store_true')
 parser.add_argument('--samples_per_task', type=int, default=-1,
     help='if negative, full dataset is used')
 parser.add_argument('--mem_size', type=int, default=600, help='controls buffer size')
+
+parser.add_argument("--use_actual_mem_size", default=False, action="store_true")
+parser.add_argument('--actual_mem_size', type=int, default=-1) # multiplying by num classes is restrictive
+
 parser.add_argument('--n_runs', type=int, default=1,
     help='number of runs to average performance')
 parser.add_argument('--suffix', type=str, default='',
@@ -115,7 +119,12 @@ else:
 LOG = get_logger(['cls_loss', 'acc'],
         n_runs=args.n_runs, n_tasks=args.n_tasks)
 
-args.mem_size = args.mem_size*args.n_classes #convert from per class to total memory
+if not args.use_actual_mem_size:
+  args.mem_size = args.mem_size*args.n_classes #convert from per class to total memory
+else:
+  args.mem_size = args.actual_mem_size
+
+print("mem size: %d" % args.mem_size)
 
 # Train the model
 # -----------------------------------------------------------------------------------------
