@@ -261,8 +261,8 @@ def get_split_cifar10(args):
     return train_ds, val_ds, test_ds
 
 def get_miniimagenet(args):
-    ROOT_PATH = '/home/eugene//data/filelists/miniImagenet/materials/images'
-    ROOT_PATH_CSV = '/home/eugene//data/filelists/miniImagenet/materials'
+    ROOT_PATH = '/scratch/shared/nfs1/xuji/datasets/MINIIMAGENET/images'
+    ROOT_PATH_CSV = '/scratch/shared/nfs1/xuji/datasets/MINIIMAGENET'
 
     args.use_conv = True
     args.n_tasks   = 20
