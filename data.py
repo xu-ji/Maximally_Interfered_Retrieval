@@ -126,8 +126,8 @@ def get_split_mnist(args):
     assert '1.' in str(torch.__version__)[:2], 'Use Pytorch 1.x!'
 
     # fetch MNIST
-    train = datasets.MNIST('Data/', train=True,  download=False)
-    test  = datasets.MNIST('Data/', train=False, download=False)
+    train = datasets.MNIST("/scratch/shared/nfs1/xuji/datasets/MNIST", train=True,  download=False)
+    test  = datasets.MNIST("/scratch/shared/nfs1/xuji/datasets/MNIST", train=False, download=False)
 
     try:
         train_x, train_y = train.data, train.targets
