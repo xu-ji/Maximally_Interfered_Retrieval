@@ -341,6 +341,7 @@ def retrieve_replay_update(args, model, opt, input_x, input_y, buffer, task, loa
             scores = post_loss - pre_loss
             EN_logits = entropy_fn(logits_track_pre)
             if args.compare_to_old_logits:
+                print("VERB comparing to old logits, %s" % str((buffer.logits[subsample].min(), buffer.logits[subsample].max())))
                 old_loss = F.cross_entropy(buffer.logits[subsample], by,reduction="none")
 
                 updated_mask = pre_loss < old_loss

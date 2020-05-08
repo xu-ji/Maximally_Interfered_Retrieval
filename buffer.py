@@ -108,6 +108,7 @@ class Buffer(nn.Module):
 
 
             if save_logits:
+                print("VERB saving logits")
                 self.logits[self.current_index: self.current_index + offset].data.copy_(logits[:offset])
 
             self.current_index += offset
