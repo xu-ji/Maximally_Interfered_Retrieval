@@ -143,6 +143,7 @@ class Buffer(nn.Module):
         self.bt[idx_buffer] = t
 
         if save_logits:
+            print("VERB saving logits")
             self.logits[idx_buffer] = logits[idx_new_data]
 
         self.n_seen_so_far += x.size(0)
