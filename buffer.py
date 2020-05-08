@@ -108,7 +108,7 @@ class Buffer(nn.Module):
 
 
             if save_logits:
-                print("VERB saving logits")
+                #print("VERB saving logits")
                 self.logits[self.current_index: self.current_index + offset].data.copy_(logits[:offset])
 
             self.current_index += offset
@@ -143,7 +143,7 @@ class Buffer(nn.Module):
         self.bt[idx_buffer] = t
 
         if save_logits:
-            print("VERB saving logits")
+            #print("VERB saving logits")
             self.logits[idx_buffer] = logits[idx_new_data]
 
         self.n_seen_so_far += x.size(0)
