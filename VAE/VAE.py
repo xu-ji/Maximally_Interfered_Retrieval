@@ -179,6 +179,7 @@ class VAE(nn.Module):
         elif self.input_type in ['multinomial', 'continuous']:
             act = None
             p_x_nn = nn.Sequential(
+                Reshape([self.args.z_size, 1, 1]), # xuji added
                 GatedConvTranspose2d(self.z_size, 64, self.last_kernel_size, 1, 0, activation=act),
                 GatedConvTranspose2d(64, 64, 5, 1, 2, activation=act),
                 GatedConvTranspose2d(64, 32, 5, 2, 2, 1, activation=act),
