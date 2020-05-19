@@ -41,7 +41,7 @@ class VAE(nn.Module):
                 assert self.input_size == [784]
                 assert self.args.gen_architecture == 'MLP'
             elif self.args.dataset=='miniimagenet': # 84x84 -> 64x64 bilateral sampling
-                self.last_kernel_size = 16 # todo change?
+                self.last_kernel_size = 16
             else:
                 print(self.input_size)
                 raise ValueError('invalid input size!!')

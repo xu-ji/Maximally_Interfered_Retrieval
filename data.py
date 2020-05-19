@@ -272,6 +272,10 @@ def get_miniimagenet(args):
     args.n_classes_per_task = 5
     args.input_size = (3, 84, 84)
     args.input_type = 'continuous' # xuji added
+    assert args.output_loss is not 'bernouilli'
+    if args.output_loss == None:
+        args.output_loss = 'mse'
+        print('\nsetting output loss to MSE')
 
     def get_data(setname):
         csv_path = os.path.join(ROOT_PATH_CSV, setname + '.csv')
