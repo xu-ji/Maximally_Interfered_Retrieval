@@ -6,7 +6,7 @@ import sys
 from numpy.random import choice
 
 strategy = 'rand' # MIR
-dataset = 'cifar10' # cifar10, miniimagenet
+dataset = 'split_cifar10' # split_cifar10, miniimagenet
 # ----
 
 debug_mode = 0
@@ -36,7 +36,7 @@ while run_counter < runs:
 
     if strategy == 'rand':
       method, gen_method = 'rand_gen', 'rand_gen'
-    else:
+    elif strategy == 'MIR':
       method, gen_method = 'mir_gen', 'mir_gen'
 
     dropout = choice([0., 0.1, 0.2, 0.3, 0.4])
