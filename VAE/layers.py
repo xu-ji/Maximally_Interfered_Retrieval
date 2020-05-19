@@ -24,6 +24,8 @@ class GatedConv2d(nn.Module):
         self.g = nn.Conv2d(input_channels, output_channels, kernel_size, stride, padding, dilation)
 
     def forward(self, x):
+        input_sz = x.shape
+
         if self.activation is None:
             h = self.h(x)
         else:
@@ -31,7 +33,11 @@ class GatedConv2d(nn.Module):
 
         g = self.sigmoid(self.g(x))
 
-        return h * g
+        res = h * g
+
+        print("GatedConv2d sz %s -> %s" % (str(input_sz), str(res.shape)))
+
+        return res
 
 
 class GatedConvTranspose2d(nn.Module):
