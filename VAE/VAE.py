@@ -226,7 +226,7 @@ class VAE(nn.Module):
             if not (x.shape[1:] == (3, 84, 84)):
                 print(x.shape)
             assert(x.shape[1:] == (3, 84, 84))
-            x = nn.functional.interpolate(x, size=[64, 64], mode='bilinear')
+            x = nn.functional.interpolate(x, size=[64, 64], mode='bilinear', align_corners=False)
 
         h = self.q_z_nn(x)
         h = h.view(h.size(0), -1)
@@ -250,7 +250,7 @@ class VAE(nn.Module):
             if not (x_mean.shape[1:] == (3, 64, 64)):
                 print(x_mean.shape)
             assert (x_mean.shape[1:] == (3, 64, 64))
-            x_mean = nn.functional.interpolate(x_mean, size=[84, 84], mode='bilinear')
+            x_mean = nn.functional.interpolate(x_mean, size=[84, 84], mode='bilinear', align_corners=False)
 
         return x_mean
 
