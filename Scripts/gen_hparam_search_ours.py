@@ -44,6 +44,7 @@ reuse_sample = 1
 cls_hiddens = 400
 
 while run_counter < runs:
+    print("doing run: %d" % run_counter)
 
     if top_args.strategy == 'rand':
       method, gen_method = 'rand_gen', 'rand_gen'
@@ -153,6 +154,7 @@ while run_counter < runs:
     if debug_mode:
         command += ' -u'
 
+    print("command:")
     print(command)
 
     os.system(command)

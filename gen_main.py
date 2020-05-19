@@ -571,13 +571,15 @@ for mode in ['valid','test']:
                           "forgetting": (final_forget_avg, final_forget_se),
                           "ELBO": (final_elbo_avg, final_elbo_se)}
 
-    if wandb is not None:
+    """
+    if wandb is not None and args.log != 'off':
         wandb.log({mode+'final_acc_avg':final_acc_avg})
         wandb.log({mode+'final_acc_se':final_acc_se})
         wandb.log({mode+'final_forget_avg':final_forget_avg})
         wandb.log({mode+'final_forget_se':final_forget_se})
         wandb.log({mode+'final_elbo_avg':final_elbo_avg})
         wandb.log({mode+'final_elbo_se':final_elbo_se})
+    """
 
 our_results["time"] = str(datetime.now())
 our_results_path = os.path.join(args.result_dir, "%s.pickle" % args.run_name)
