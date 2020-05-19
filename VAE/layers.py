@@ -48,7 +48,7 @@ class GatedConvTranspose2d(nn.Module):
                                     dilation=dilation)
 
     def forward(self, x):
-        #print("GatedConvTranspose2d input sz %s" % str(x.shape))
+        input_sz = x.shape
         if self.activation is None:
             h = self.h(x)
         else:
@@ -56,7 +56,11 @@ class GatedConvTranspose2d(nn.Module):
 
         g = self.sigmoid(self.g(x))
 
-        return h * g
+        res = h * g
+
+        print("GatedConvTranspose2d sz %s -> %s" % (str(input_sz), str(res.shape)))
+
+        return res
 
 
 class MaskedLinear(nn.Module):

@@ -34,6 +34,8 @@ class VAE(nn.Module):
             self.last_kernel_size = (7, 5)
         elif self.input_size == [3, 32, 32]:
             self.last_kernel_size = 8
+        elif self.input_size == [3, 84, 84]:
+            self.last_kernel_size = 8 # TODO change?
         else:
             if self.args.dataset=='permuted_mnist':
                 # this dataset has no 3D structure
