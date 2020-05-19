@@ -22,6 +22,8 @@ debug_mode = 0
 
 sys.path.append(os.getcwd())
 
+dataset = top_args.dataset
+
 runs = top_args.runs
 run_counter = 0
 
