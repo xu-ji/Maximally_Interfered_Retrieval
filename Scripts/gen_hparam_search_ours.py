@@ -14,6 +14,8 @@ parser.add_argument('--dataset', type=str, required=True) # split_cifar10, minii
 parser.add_argument('--runs', type=int, required=True) # 500
 parser.add_argument('--repeats', type=int, required=True) # 3
 
+parser.add_argument('--run_counter_start', type=int, default=0)
+
 top_args = parser.parse_args()
 
 
@@ -26,7 +28,7 @@ sys.path.append(os.getcwd())
 dataset = top_args.dataset
 
 runs = top_args.runs
-run_counter = 0
+run_counter = top_args.run_counter_start
 
 n_runs = top_args.repeats
 
