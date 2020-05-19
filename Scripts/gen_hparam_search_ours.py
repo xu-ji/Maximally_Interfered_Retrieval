@@ -156,6 +156,7 @@ while run_counter < runs:
 
     print("command:")
     print(command)
+    sys.stdout.flush()
 
     os.system(command)
     time.sleep(2)
