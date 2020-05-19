@@ -48,6 +48,7 @@ class GatedConvTranspose2d(nn.Module):
                                     dilation=dilation)
 
     def forward(self, x):
+        print("GatedConvTranspose2d input sz %s" % str(x.shape))
         if self.activation is None:
             h = self.h(x)
         else:

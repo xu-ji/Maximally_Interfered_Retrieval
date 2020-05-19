@@ -5,22 +5,20 @@ import time
 import sys
 from numpy.random import choice
 
-strategy = 'rand' # MIR
-dataset = 'split_cifar10' # split_cifar10, miniimagenet
-# ----
+strategy = 'rand'
 
 debug_mode = 0
 
 sys.path.append(os.getcwd())
 
-runs = 500
+runs = 1000
 run_counter = 0
 
 n_runs = 3
 
 # fixed
-
-result_dir = '%s_hparam_search_%s' % (dataset, strategy)
+dataset = 'split_mnist'
+result_dir = 'split-mnist_hparam_search'
 log = 'off'
 
 if debug_mode:
@@ -35,9 +33,9 @@ cls_hiddens = 400
 while run_counter < runs:
 
     if strategy == 'rand':
-      method, gen_method = 'rand_gen', 'rand_gen'
+        method, gen_method = 'rand_gen', 'rand_gen'
     elif strategy == 'MIR':
-      method, gen_method = 'mir_gen', 'mir_gen'
+        method, gen_method = 'mir_gen', 'mir_gen'
 
     dropout = choice([0., 0.1, 0.2, 0.3, 0.4])
 
@@ -104,7 +102,6 @@ while run_counter < runs:
 
     cwd = os.getcwd()
     command = "python3 gen_main.py \
-        --run_name %(run_counter)s \
         --dataset %(dataset)s \
         --n_runs %(n_runs)s \
         --log %(log)s \
@@ -147,4 +144,3 @@ while run_counter < runs:
     os.system(command)
     time.sleep(2)
     run_counter += 1
-
