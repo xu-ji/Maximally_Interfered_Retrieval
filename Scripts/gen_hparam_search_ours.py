@@ -4,23 +4,32 @@ import os
 import time
 import sys
 from numpy.random import choice
+import argparse
 
-strategy = 'rand' # MIR
-dataset = 'split_cifar10' # split_cifar10, miniimagenet
+parser = argparse.ArgumentParser()
+parser.add_argument('--strategy', type=str, required=True) # rand, MIR
+parser.add_argument('--dataset', type=str, required=True) # split_cifar10, miniimagenet
+
+parser.add_argument('--runs', type=int, required=True) # 500
+parser.add_argument('--repeats', type=int, required=True) # 3
+
+top_args = parser.parse_args()
+
+
 # ----
 
 debug_mode = 0
 
 sys.path.append(os.getcwd())
 
-runs = 1 # 500
+runs = top_args.runs
 run_counter = 0
 
-n_runs = 1 #3
+n_runs = top_args.repeats
 
 # fixed
 
-result_dir = '%s_hparam_search_%s' % (dataset, strategy)
+result_dir = '%s_hparam_search_%s' % (top_args.dataset, top_args.strategy)
 log = 'off'
 
 if debug_mode:
@@ -34,9 +43,9 @@ cls_hiddens = 400
 
 while run_counter < runs:
 
-    if strategy == 'rand':
+    if top_args.strategy == 'rand':
       method, gen_method = 'rand_gen', 'rand_gen'
-    elif strategy == 'MIR':
+    elif top_args.strategy == 'MIR':
       method, gen_method = 'mir_gen', 'mir_gen'
 
     dropout = choice([0., 0.1, 0.2, 0.3, 0.4])
