@@ -584,4 +584,4 @@ for mode in ['valid','test']:
 our_results["time"] = str(datetime.now())
 our_results_path = os.path.join(result_path, "%s.pickle" % args.run_name)
 with open(our_results_path, "wb") as our_results_f:
-  pickle.dump(our_results, our_results_path)
+  pickle.dump(our_results, our_results_f)
