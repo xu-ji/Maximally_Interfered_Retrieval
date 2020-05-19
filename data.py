@@ -271,6 +271,7 @@ def get_miniimagenet(args):
     args.multiple_heads = False
     args.n_classes_per_task = 5
     args.input_size = (3, 84, 84)
+    args.input_type = 'continuous' # xuji added
 
     def get_data(setname):
         csv_path = os.path.join(ROOT_PATH_CSV, setname + '.csv')
