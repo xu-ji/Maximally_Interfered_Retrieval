@@ -5,6 +5,7 @@ import time
 import sys
 from numpy.random import choice
 import argparse
+from datetime import datetime
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--strategy', type=str, required=True) # rand, MIR
@@ -44,7 +45,7 @@ reuse_sample = 1
 cls_hiddens = 400
 
 while run_counter < runs:
-    print("doing run: %d" % run_counter)
+    print("doing run: %d %s" % (run_counter, str(datetime.now())))
 
     if top_args.strategy == 'rand':
       method, gen_method = 'rand_gen', 'rand_gen'
