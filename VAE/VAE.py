@@ -265,6 +265,14 @@ class VAE(nn.Module):
         h = self.p_x_nn(z)
         x_mean = self.p_x_mean(h)
 
+        # if miniimagenet, resize x_mean to 84x84
+        if self.args.dataset == 'miniimagenet':
+            if not (x_mean.shape[1:] == (3, 64, 64)):
+                print(x_mean.shape)
+            assert (x_mean.shape[1:] == (3, 64, 64))
+            x_mean = nn.functional.interpolate(x_mean, size=[84, 84], mode='bilinear',
+                                               align_corners=False)
+
         return x_mean
 
     def forward(self, x):
