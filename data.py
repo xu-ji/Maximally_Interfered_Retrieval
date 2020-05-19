@@ -126,8 +126,8 @@ def get_split_mnist(args):
     assert '1.' in str(torch.__version__)[:2], 'Use Pytorch 1.x!'
 
     # fetch MNIST
-    train = datasets.MNIST("/scratch/shared/nfs1/xuji/datasets", train=True,  download=False)
-    test  = datasets.MNIST("/scratch/shared/nfs1/xuji/datasets", train=False, download=False)
+    train = datasets.MNIST("/scratch/shared/nfs1/ours/datasets", train=True,  download=False)
+    test  = datasets.MNIST("/scratch/shared/nfs1/ours/datasets", train=False, download=False)
 
     try:
         train_x, train_y = train.data, train.targets
@@ -207,8 +207,8 @@ def get_split_cifar10(args):
 
 
     # fetch MNIST
-    train = datasets.CIFAR10('/scratch/shared/nfs1/xuji/datasets/CIFAR/', train=True,  download=False)
-    test  = datasets.CIFAR10('/scratch/shared/nfs1/xuji/datasets/CIFAR/', train=False, download=False)
+    train = datasets.CIFAR10('/scratch/shared/nfs1/ours/datasets/CIFAR/', train=True,  download=False)
+    test  = datasets.CIFAR10('/scratch/shared/nfs1/ours/datasets/CIFAR/', train=False, download=False)
 
     try:
         train_x, train_y = train.data, train.targets
@@ -261,8 +261,8 @@ def get_split_cifar10(args):
     return train_ds, val_ds, test_ds
 
 def get_miniimagenet(args):
-    ROOT_PATH = '/scratch/shared/nfs1/xuji/datasets/MINIIMAGENET/images'
-    ROOT_PATH_CSV = '/scratch/shared/nfs1/xuji/datasets/MINIIMAGENET'
+    ROOT_PATH = '/scratch/shared/nfs1/ours/datasets/MINIIMAGENET/images'
+    ROOT_PATH_CSV = '/scratch/shared/nfs1/ours/datasets/MINIIMAGENET'
 
     args.use_conv = True
     args.n_tasks   = 20

@@ -14,11 +14,13 @@ from pydoc  import locate
 from model  import ResNet18, CVAE, MLP, classifier
 from VAE    import VAE
 from VAE.loss import calculate_loss
+import pickle
 
 # Arguments
 # -----------------------------------------------------------------------------------------
 
 parser = argparse.ArgumentParser()
+parser.add_argument('--run_name', type=int, default=0)
 parser.add_argument('-u', '--unit_test', action='store_true',
     help='unit testing mode for fast debugging')
 parser.add_argument('-d', '--dataset', type=str, default = 'split_mnist',
@@ -123,6 +125,9 @@ args = parser.parse_args()
 
 # Obligatory overhead
 # -----------------------------------------------------------------------------------------
+
+# ours:
+print("run name: %d" % args.run_name)
 
 result_path = os.path.join('Results', args.result_dir)
 if not os.path.exists(result_path): os.mkdir(result_path)
@@ -523,6 +528,9 @@ print('--------------------------------------')
 print('FINAL Results')
 print('--------------------------------------')
 print('--------------------------------------')
+
+
+our_results = {}
 for mode in ['valid','test']:
 
     # accuracy
@@ -551,6 +559,10 @@ for mode in ['valid','test']:
     print('\nFinal {} Forget: {:.3f} +/- {:.3f}'.format(mode, final_forget_avg, final_forget_se))
     print('\nFinal {} ELBO: {:.3f} +/- {:.3f}'.format(mode, final_elbo_avg, final_elbo_se))
 
+    our_results[mode] = {"accuracy": (final_acc_avg, final_acc_se),
+                          "forgetting": (final_forget_avg, final_forget_se),
+                          "ELBO": (final_elbo_avg, final_elbo_se)}
+
     if wandb is not None:
         wandb.log({mode+'final_acc_avg':final_acc_avg})
         wandb.log({mode+'final_acc_se':final_acc_se})
@@ -558,3 +570,7 @@ for mode in ['valid','test']:
         wandb.log({mode+'final_forget_se':final_forget_se})
         wandb.log({mode+'final_elbo_avg':final_elbo_avg})
         wandb.log({mode+'final_elbo_se':final_elbo_se})
+
+our_results_path = os.path.join(args.result_dir, "%s.pickle" % args.run_name)
+with open(our_results_path, "wb") as our_results_f:
+  pickle.dump(our_results, our_results_path)
