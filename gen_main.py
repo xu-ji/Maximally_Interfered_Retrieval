@@ -15,6 +15,8 @@ from model  import ResNet18, CVAE, MLP, classifier
 from VAE    import VAE
 from VAE.loss import calculate_loss
 import pickle
+from datetime import datetime
+import sys
 
 # Arguments
 # -----------------------------------------------------------------------------------------
@@ -191,6 +193,9 @@ LOG = get_logger(['gen_loss', 'cls_loss', 'acc'],
 # -----------------------------------------------------------------------------------------
 
 # --------------
+print("beginning training %s" % datetime.now())
+sys.stdout.flush()
+
 # Begin Run Loop
 for run in range(args.n_runs):
 
@@ -233,6 +238,7 @@ for run in range(args.n_runs):
     #----------------
     # Begin Task Loop
     for task, tr_loader in enumerate(train_loader):
+        sys.stdout.flush()
 
         print('\n--------------------------------------')
         print('Run #{} Task #{} TRAIN'.format(run, task))
@@ -529,6 +535,8 @@ print('FINAL Results')
 print('--------------------------------------')
 print('--------------------------------------')
 
+print("ended training %s" % datetime.now())
+sys.stdout.flush()
 
 our_results = {}
 for mode in ['valid','test']:
@@ -571,6 +579,7 @@ for mode in ['valid','test']:
         wandb.log({mode+'final_elbo_avg':final_elbo_avg})
         wandb.log({mode+'final_elbo_se':final_elbo_se})
 
+our_results["time"] = str(datetime.now())
 our_results_path = os.path.join(args.result_dir, "%s.pickle" % args.run_name)
 with open(our_results_path, "wb") as our_results_f:
   pickle.dump(our_results, our_results_path)
