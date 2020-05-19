@@ -42,6 +42,7 @@ class VAE(nn.Module):
                 assert self.input_size == [784]
                 assert self.args.gen_architecture == 'MLP'
             else:
+                print(self.input_size)
                 raise ValueError('invalid input size!!')
 
         self.q_z_nn, self.q_z_mean, self.q_z_var = self.create_encoder()
