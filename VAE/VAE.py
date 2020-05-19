@@ -223,6 +223,9 @@ class VAE(nn.Module):
 
         h = self.q_z_nn(x)
         h = h.view(h.size(0), -1)
+        print("encoded code")
+        print(h.shape)
+
         mean = self.q_z_mean(h)
         var = self.q_z_var(h)
 
