@@ -32,7 +32,7 @@ n_runs = top_args.repeats
 
 # fixed
 
-result_dir = '%s_hparam_search_%s' % (top_args.dataset, top_args.strategy)
+result_dir = '%s_hparam_search_%s' % (top_args.dataset, top_args.strategy) # within Results
 log = 'off'
 
 if debug_mode:
