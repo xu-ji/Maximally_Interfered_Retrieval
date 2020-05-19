@@ -223,8 +223,10 @@ class VAE(nn.Module):
 
         # if miniimagenet, resize x to 64x64
         if self.args.dataset=='miniimagenet':
-          assert(x.shape[1:] == (3, 84, 84))
-          x = nn.functional.interpolate(x, size=[64, 64], mode='bilinear')
+            if not (x.shape[1:] == (3, 84, 84)):
+                print(x.shape)
+            assert(x.shape[1:] == (3, 84, 84))
+            x = nn.functional.interpolate(x, size=[64, 64], mode='bilinear')
 
         h = self.q_z_nn(x)
         h = h.view(h.size(0), -1)
@@ -245,8 +247,10 @@ class VAE(nn.Module):
 
         # if miniimagenet, resize x_mean to 84x84
         if self.args.dataset=='miniimagenet':
-          assert (x_mean.shape[1:] == (3, 64, 64))
-          x_mean = nn.functional.interpolate(x_mean, size=[84, 84], mode='bilinear')
+            if not (x_mean.shape[1:] == (3, 64, 64)):
+                print(x_mean.shape)
+            assert (x_mean.shape[1:] == (3, 64, 64))
+            x_mean = nn.functional.interpolate(x_mean, size=[84, 84], mode='bilinear')
 
         return x_mean
 
