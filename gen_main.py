@@ -205,7 +205,7 @@ for run in range(args.n_runs):
 
     # CLASSIFIER
     if args.use_conv:
-        cls = ResNet18(args.n_classes, nf=20, input_size=args.input_size)
+        cls = ResNet18(args.n_classes, nf=20, input_size=args.input_size).to(args.device) # xuji added
     else:
         #cls = MLP(args)
         cls = classifier(args).to(args.device)
