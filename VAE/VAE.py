@@ -35,13 +35,13 @@ class VAE(nn.Module):
             self.last_kernel_size = (7, 5)
         elif self.input_size == [3, 32, 32]:
             self.last_kernel_size = 8
-        elif self.input_size == [3, 84, 84]:
-            self.last_kernel_size = 16 # TODO change?
         else:
             if self.args.dataset=='permuted_mnist':
                 # this dataset has no 3D structure
                 assert self.input_size == [784]
                 assert self.args.gen_architecture == 'MLP'
+            elif self.args.dataset=='miniimagenet': # 84x84 -> 64x64 bilateral sampling
+                self.last_kernel_size = 12 # todo change?
             else:
                 print(self.input_size)
                 raise ValueError('invalid input size!!')
@@ -195,7 +195,7 @@ class VAE(nn.Module):
             p_x_mean = nn.Sequential(
                 nn.Conv2d(32, 256, 5, 1, 2),
                 nn.Conv2d(256, self.input_size[0] * num_classes, 1, 1, 0),
-                # output shape: batch_size, num_channels * num_classes, pixel_width, pixel_height
+                # output shape: batch_size, num_channels * 1, pixel_width, pixel_height
             )
 
             return p_x_nn, p_x_mean
@@ -221,12 +221,15 @@ class VAE(nn.Module):
         Encoder expects following data shapes as input: shape = (batch_size, num_channels, width, height)
         """
 
+        # if miniimagenet, resize x to 64x64
+        if self.args.dataset=='miniimagenet':
+          assert(x.shape[1:] == (3, 84, 84))
+          x = nn.functional.interpolate(x, size=[64, 64], mode='bilinear')
+
         h = self.q_z_nn(x)
         h = h.view(h.size(0), -1)
-        print("encoded code")
-        print(h.shape)
 
-        mean = self.q_z_mean(h)
+        mean = self.q_z_mean(h) # projects to code z_size
         var = self.q_z_var(h)
 
         return mean, var
@@ -239,6 +242,11 @@ class VAE(nn.Module):
 
         h = self.p_x_nn(z)
         x_mean = self.p_x_mean(h)
+
+        # if miniimagenet, resize x_mean to 84x84
+        if self.args.dataset=='miniimagenet':
+          assert (x_mean.shape[1:] == (3, 64, 64))
+          x_mean = nn.functional.interpolate(x_mean, size=[84, 84], mode='bilinear')
 
         return x_mean
 
