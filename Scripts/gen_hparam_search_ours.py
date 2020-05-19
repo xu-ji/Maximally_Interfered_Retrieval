@@ -13,10 +13,10 @@ debug_mode = 0
 
 sys.path.append(os.getcwd())
 
-runs = 500
+runs = 1 # 500
 run_counter = 0
 
-n_runs = 3
+n_runs = 1 #3
 
 # fixed
 
