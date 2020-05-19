@@ -27,6 +27,7 @@ class VAE(nn.Module):
         self.input_type = args.input_type
         self.gen_hiddens = args.gen_hiddens
 
+        self.input_size = list(self.input_size) # xuji added
 
         if self.input_size == [1, 28, 28] or self.input_size == [3, 28, 28]:
             self.last_kernel_size = 7
