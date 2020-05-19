@@ -238,6 +238,11 @@ class ResNet(nn.Module):
         last_hid = nf * 8 * block.expansion if input_size[1] in [8,16,21,32,42] else 640
         self.linear = nn.Linear(last_hid, num_classes)
 
+        # get gradient dimension: xuji added
+        self.grad_dims = []
+        for param in self.parameters():
+          self.grad_dims.append(param.data.numel())
+
     def _make_layer(self, block, planes, num_blocks, stride):
         strides = [stride] + [1] * (num_blocks - 1)
         layers = []
