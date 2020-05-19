@@ -66,7 +66,7 @@ def get_permuted_mnist(args):
     args.multiple_heads = False
     args.n_classes = 10
     if 'mem_size' in args:
-        args.buffer_size = args.mem_size * args.n_classes
+        args.buffer_size = args.mem_size * args.n_classes # not used
     args.n_tasks = 10 if args.n_tasks==-1 else args.n_tasks
     args.use_conv = False
     args.input_type = 'binary'
@@ -115,7 +115,7 @@ def get_split_mnist(args):
     args.n_classes = 10
     args.n_tasks = 5 if args.n_tasks==-1 else args.n_tasks
     if 'mem_size' in args:
-        args.buffer_size = args.n_tasks * args.mem_size * 2
+        args.buffer_size = args.n_tasks * args.mem_size * 2 # not used
     args.use_conv = False
     args.input_type = 'binary'
     args.input_size = [1,28,28]
@@ -191,7 +191,8 @@ def get_split_cifar10(args):
     assert '1.' in str(torch.__version__)[:2], 'Use Pytorch 1.x!'
     args.n_tasks   = 5
     args.n_classes = 10
-    args.buffer_size = args.n_tasks * args.mem_size * 2
+    if 'mem_size' in args:
+        args.buffer_size = args.n_tasks * args.mem_size * 2
     args.multiple_heads = False
     args.use_conv = True
     args.n_classes_per_task = 2
