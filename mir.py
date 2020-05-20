@@ -77,7 +77,11 @@ def retrieve_gen_for_cls(args, x, cls, prev_cls, prev_gen):
                    args.cls_div_coeff * DIV + \
                    -args.cls_shell_coeff * SHELL
 
-            z_g = torch.autograd.grad(gain, z_new)[0]
+            if not isinstance(gain, float):
+              z_g = torch.autograd.grad(gain, z_new)[0]
+            else:
+              assert(gain == 0.)
+              z_g = 0.
             z_new = (z_new + 1 * z_g).detach()
 
         if z_new_max is None:
