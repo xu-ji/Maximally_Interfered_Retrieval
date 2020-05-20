@@ -15,7 +15,7 @@ for dataset in ["split_cifar10", "miniimagenet"]:
             with open(results_p, "rb") as f:
                 results = pickle.load(f)
 
-                print(results)
+                #print(results)
 
                 for mode in ["valid", "test"]:
                     if best_res[mode] is None or best_res[mode][mode]["accuracy"] < results[mode]["accuracy"]:
