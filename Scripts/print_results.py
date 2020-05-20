@@ -18,7 +18,7 @@ for dataset in ["split_cifar10", "miniimagenet"]:
                 print(results)
 
                 for mode in ["valid", "test"]:
-                    if best_res[mode] is None or best_res[mode]["accuracy"] < results[mode]["accuracy"]:
+                    if best_res[mode] is None or best_res[mode][mode]["accuracy"] < results[mode]["accuracy"]:
                         best_run[mode] = run
                         best_res[mode] = results
 
