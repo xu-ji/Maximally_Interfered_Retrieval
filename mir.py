@@ -78,10 +78,10 @@ def retrieve_gen_for_cls(args, x, cls, prev_cls, prev_gen):
                    -args.cls_shell_coeff * SHELL
 
             if not isinstance(gain, float):
-              z_g = torch.autograd.grad(gain, z_new)[0]
+                z_g = torch.autograd.grad(gain, z_new)[0]
             else:
-              assert(gain == 0.)
-              z_g = 0.
+                assert(gain == 0.)
+                z_g = 0.
             z_new = (z_new + 1 * z_g).detach()
 
         if z_new_max is None:
@@ -178,7 +178,11 @@ def retrieve_gen_for_gen(args, x, gen, prev_gen, prev_cls):
                    args.gen_div_coeff * DIV + \
                    -args.gen_shell_coeff * SHELL
 
-            z_g = torch.autograd.grad(gain, z_new)[0]
+            if not isinstance(gain, float):
+                z_g = torch.autograd.grad(gain, z_new)[0]
+            else:
+                assert (gain == 0.)
+                z_g = 0.
             z_new = (z_new + 1 * z_g).detach()
 
 
@@ -432,7 +436,11 @@ def max_z_for_cls(args, virtual_cls, prev_cls, prev_gen, z_mu, z_var, z_t, gradi
                    args.cls_div_coeff * DIV + \
                    -args.cls_shell_coeff * SHELL
 
-            z_g = torch.autograd.grad(gain, z_new)[0]
+            if not isinstance(gain, float):
+                z_g = torch.autograd.grad(gain, z_new)[0]
+            else:
+                assert(gain == 0.)
+                z_g = 0.
             z_new = (z_new + 1 * z_g).detach()
 
         if z_new_max is None:
@@ -521,7 +529,11 @@ def max_z_for_gen(args, virtual_gen, prev_gen, prev_cls, z_mu, z_var, z_t, gradi
                    args.gen_div_coeff * DIV + \
                    -args.gen_shell_coeff * SHELL
 
-            z_g = torch.autograd.grad(gain, z_new)[0]
+            if not isinstance(gain, float):
+                z_g = torch.autograd.grad(gain, z_new)[0]
+            else:
+                assert(gain == 0.)
+                z_g = 0.
             z_new = (z_new + 1 * z_g).detach()
 
 
